@@ -27,7 +27,8 @@ public class ListAnswerController {
     @GetMapping()
     public Feedback get(){
 
-        return userService.analisador();
-
+        Feedback feedback = userService.analisador();
+        userService.deleteQuetionsUsers();
+        return feedback;
     }
 }

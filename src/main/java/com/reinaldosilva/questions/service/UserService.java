@@ -25,9 +25,7 @@ public class UserService {
     //Método para salvar a resposta de User
     public ListAnswer saveAnswer(Long idQuestion, Long idAnswer) {
 
-
         ListAnswer listAnswer = answerListRepository.save(isAnswer(idQuestion, idAnswer));
-
         return listAnswer;
 
     }
@@ -67,20 +65,32 @@ public class UserService {
 
         feedback.setResultado(resultado);
 
-        if (categoriaFront < categoriaBack) {
+        if(categoriaBack + categoriaFront == 10){
 
-            feedback.setMessageFeedback("Caro estudante você precisa estudar mais FRONTEND");
-            feedback.setLinkFeedback("https://www.google.com/search?q=frontend");
+            feedback.setMessageFeedback("Parabens você acertou todas questões!");
+            feedback.setLinkFeedback("teste");
 
-        } else {
-            feedback.setMessageFeedback("Caro estudante você precisa estudar mais BACKEND");
-            feedback.setLinkFeedback("https://www.google.com/search?q=backend");
+
+        }else{
+            if (categoriaFront < categoriaBack) {
+
+                feedback.setMessageFeedback("Caro estudante você precisa estudar mais FRONTEND");
+                feedback.setLinkFeedback("https://www.google.com/search?q=frontend");
+
+            } else {
+                feedback.setMessageFeedback("Caro estudante você precisa estudar mais BACKEND");
+                feedback.setLinkFeedback("https://www.google.com/search?q=backend");
+            }
         }
+
 
         return feedback;
 
     }
 
 
+    public void deleteQuetionsUsers() {
 
+        answerListRepository.deleteAll();
+    }
 }
